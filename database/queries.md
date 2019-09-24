@@ -53,9 +53,7 @@ where show_user_note.id_show is null`
 `select ``show``.id, ``show``.label, show_tag.id_tag
 from ``show``
 left join show_user_note on show_user_note.id_show = ``show``.id and  show_user_note.id_user = 1  
-left join show_tag  on show_tag.id_show = ``show``.id `
-
-where show_user_note.id_show is null
+left join show_tag  on show_tag.id_show = ``show``.id where show_user_note.id_show is null`
 
 ### Association des notes des tags de l'utilisateur 1 sur les tags des séries que l'utilisateur 1 n'a pas noté
 
