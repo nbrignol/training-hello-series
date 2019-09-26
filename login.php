@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 $user = 'root';
 $pass = 'root';
@@ -26,7 +27,11 @@ if ( isset($_REQUEST['email'], $_REQUEST['password']) ) {
 		$message = "Erreur de login, merci de réessayer ";
 	} else {
 		$id = $line['id'];
-		$message = "Vous êtes connecté avec l'id #$id";
+		
+		$_SESSION['user_id'] = $id;
+		$_SESSION['user_email'] = $email;
+
+		header('Location: list.php');
 		
 	}
 	
