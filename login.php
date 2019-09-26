@@ -1,65 +1,37 @@
 <?php 
+require_once("entity/User.php");
+require_once("dao/UserSqlDao.php");
+require_once("template/TemplateManager.php");
+
 session_start();
 
-$user = 'root';
-$pass = 'root';
-
-$host = 'localhost';
-$db   = 'hello_series';
-$charset = 'utf8';
-
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-
-$pdo = new PDO($dsn, $user, $pass);
-
+$message = NULL;
 if ( isset($_REQUEST['email'], $_REQUEST['password']) ) {
 
+	$userDao = new UserSqlDao();
+	$user = new User();
 
-	$email = $_REQUEST['email'];
-	$password = $_REQUEST['password'];
+	$user->email = $_REQUEST['email'];
+	$user->password = $_REQUEST['password'];
 
-	$sql = "SELECT id FROM user WHERE email='$email' AND password = '$password'";
+	//print_r($user);
 
-	$queryResult = $pdo->query($sql);
-	$line = $queryResult->fetch(PDO::FETCH_ASSOC);
+	$loginResult = $userDao->checkLogin($user);
 
-	if ( ! $line) {
+	//print_r($user);
+
+	if ( ! $loginResult) {
 		$message = "Erreur de login, merci de réessayer ";
 	} else {
-		$id = $line['id'];
-		
-		$_SESSION['user_id'] = $id;
-		$_SESSION['user_email'] = $email;
-
+		$_SESSION['user'] = $user;
 		header('Location: list.php');
-		
 	}
 	
 }
 
+$templateManager = new TemplateManager();
+$templateManager->render("login", [
+	'message' => $message
+]);
+
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login - HelloSeries</title>
-</head>
-<body>
-	<h1>Login HelloSeries</h1>
-
-	<form method="POST" action="">
-		<p><label>Votre E-mail</label><input type="text" name="email" /></p>
-
-		<p><label>Votre mot de passe</label><input type="password" name="password" /></p>
-
-		<p><input type="submit"></p>
-	</form>
-
-	<?php if (isset($message)): ?>
-	<p><?php echo $message; ?></p>
-	<?php endif; ?>
-
-	<p>&copy; 2019</p>
-
-</body>
-</html>
