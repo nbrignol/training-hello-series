@@ -42,14 +42,16 @@ class ShowSqlDao {
 
 	}
 
-	public function listMyShows() {
+	public function listMyShows(User $user) {
 		$sql = "SELECT id, label, show_user_note.note 
 				FROM `show` 
-				LEFT JOIN show_user_note ON `show`.id = show_user_note.id_show AND show_user_note.id_user = 1
+				LEFT JOIN show_user_note ON `show`.id = show_user_note.id_show AND show_user_note.id_user = :user_id
 				WHERE show_user_note.note is not null
 				ORDER BY show_user_note.note DESC";
 
-		$queryResult = $this->pdo->query($sql);
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':user_id', $user->id);
+		$queryResult = $query->execute();
 		
 		$result = [];
 
@@ -57,7 +59,7 @@ class ShowSqlDao {
 			return $result;
 		}
 
-		while($line = $queryResult->fetch(PDO::FETCH_ASSOC)){
+		while($line = $query->fetch(PDO::FETCH_ASSOC)){
 			$show = new Show();
 			$show->id = $line['id'];
 			$show->label = $line['label'];
