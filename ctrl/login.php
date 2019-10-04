@@ -1,9 +1,5 @@
 <?php 
-require_once("entity/User.php");
-require_once("dao/UserSqlDao.php");
-require_once("template/TemplateManager.php");
 
-session_start();
 
 $message = NULL;
 if ( isset($_REQUEST['email'], $_REQUEST['password']) ) {
@@ -24,7 +20,7 @@ if ( isset($_REQUEST['email'], $_REQUEST['password']) ) {
 		$message = "Erreur de login, merci de réessayer ";
 	} else {
 		$_SESSION['user'] = $user;
-		header('Location: list.php');
+		header('Location: index.php?ctrl=list');
 	}
 	
 }
