@@ -1,0 +1,28 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font-family: sans-serif;
+	padding: 1em;
+}
+
+.showList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	width: 50%;
+}
+
+.showList .show {
+	padding: 1em;
+	margin: 1em;
+	text-align: center;
+
+	background: #333;
+	color: white;
+
+}
