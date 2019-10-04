@@ -1,7 +1,7 @@
 <?php 
 
 $dao = new ShowSqlDao();
-$list = $dao->listAll();
+$list = $dao->listMyShows();
 
 $templateManager = new TemplateManager();
 $templateManager->render("list", [

@@ -25,4 +25,18 @@ body {
 	background: #333;
 	color: white;
 
+	position: relative;
+
+
+}
+.showList .show .title {
+	display: inline-block;
+}
+.showList .show .note {
+	display: inline-block;
+	margin-left: 0.5em;
+	background-color: green;
+	padding: 0.4em;
+	font-weight: bold;
+	font-size: 1.3em;
 }

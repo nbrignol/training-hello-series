@@ -10,7 +10,8 @@
 	<section class="showList">
 	<?php foreach($shows as $show): ?>
 		<article class="show">
-			<h2><?php echo $show->label; ?></h2>
+			<h2 class="title"><?php echo $show->label; ?></h2>
+			<p class="note"><?php echo $show->note; ?></p>
 		</article>
 	<?php endforeach; ?>
 	</section>
