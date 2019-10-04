@@ -5,3 +5,4 @@
 - Autoloader
 - Controller as classes
 - Service container for DAO and more
+- TemplateManager with base template
