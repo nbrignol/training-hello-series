@@ -65,3 +65,23 @@ body {
 
 	
 }
+
+.noteComponent p {
+	transition: all 0.2s;
+	padding-top: 0;
+
+	background-image: url(wait.gif);
+	background-repeat: no-repeat;
+	background-size: 1em;
+	
+	background-position: -100px 0;
+}
+
+.noteComponent p.waiting {
+	opacity: 0.5;
+	pointer-events: none;
+
+	background-position:  0px 0px;
+	
+
+}

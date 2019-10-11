@@ -3,6 +3,7 @@
 <head>
 	<title>Liste des séries - HelloSeries</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
 	<h1>HelloSeries</h1>
@@ -36,5 +37,6 @@
 
 	<p>&copy; 2019</p>
 
+	<script type="text/javascript" src="module-note.js"></script>
 </body>
 </html>
