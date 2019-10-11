@@ -40,3 +40,28 @@ body {
 	font-weight: bold;
 	font-size: 1.3em;
 }
+
+
+
+.noteComponent {
+	font-size: 1em;
+	border: 1px solid white;
+	padding: 0.5em;
+	margin: 0.5em 0;
+}
+
+
+.noteComponent a {
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
+
+.noteComponent a.selected {
+	background-color: white;
+	color: black;
+	padding: 0 0.3em;
+
+
+	
+}

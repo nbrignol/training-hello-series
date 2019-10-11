@@ -2,6 +2,7 @@
 
 require_once("entity/User.php");
 require_once("entity/Show.php");
+require_once("dao/NoteSqlDao.php");
 require_once("dao/UserSqlDao.php");
 require_once("dao/ShowSqlDao.php");
 require_once("template/TemplateManager.php");

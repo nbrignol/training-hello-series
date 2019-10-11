@@ -8,7 +8,9 @@ if (! isset($_SESSION['user'])){
 $currentUser = $_SESSION['user'];
 
 $dao = new ShowSqlDao();
-$list = $dao->listReco($currentUser);
+//$list = $dao->listAll();
+//$list = $dao->listReco($currentUser);
+$list = $dao->listMyShows($currentUser);
 
 
 $templateManager = new TemplateManager();
