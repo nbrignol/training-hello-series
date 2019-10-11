@@ -71,5 +71,48 @@ class ShowSqlDao {
 
 		return $result;
 	}
+
+	public function listReco(User $user) {
+		$sql = "select `show`.id, `show`.label, 
+sum(notation_tag.notation_tag_note) as show_note
+from `show`
+left join show_tag  on show_tag.id_show = `show`.id 
+left join show_user_note on show_user_note.id_show = `show`.id and  show_user_note.id_user = :user_id  
+left join (
+        select 
+        tag.id as notation_tag_id,
+        sum(show_user_note.note) as notation_tag_note
+        from show_user_note
+        left join `show` on `show`.id = show_user_note.id_show         
+        left join show_tag on show_tag.id_show = `show`.id
+        left join tag on tag.id = show_tag.id_tag
+        where id_user = :user_id
+        group by tag.id
+        order by notation_tag_note DESC
+) as notation_tag on show_tag.id_tag = notation_tag.notation_tag_id
+where show_user_note.id_show is  null
+group by `show`.id
+order by show_note DESC";
+
+		$query = $this->pdo->prepare($sql);
+		$query->bindParam(':user_id', $user->id);
+		$queryResult = $query->execute();
+		
+		$result = [];
+
+		if (! $queryResult) {
+			return $result;
+		}
+
+		while($line = $query->fetch(PDO::FETCH_ASSOC)){
+			$show = new Show();
+			$show->id = $line['id'];
+			$show->label = $line['label'];
+			
+			$result[] = $show;			
+		}
+
+		return $result;
+	}
 }
 
